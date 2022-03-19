@@ -17,13 +17,15 @@ package main
 import (
 	"context"
 	"flag"
+	"fmt"
 
+	"github.com/Revolyssup/envoy-xds-server/client"
+	"github.com/Revolyssup/envoy-xds-server/internal/processor"
+	"github.com/Revolyssup/envoy-xds-server/internal/server"
+	"github.com/Revolyssup/envoy-xds-server/internal/watcher"
 	"github.com/envoyproxy/go-control-plane/pkg/cache/v3"
 	serverv3 "github.com/envoyproxy/go-control-plane/pkg/server/v3"
 	log "github.com/sirupsen/logrus"
-	"github.com/stevesloka/envoy-xds-server/internal/processor"
-	"github.com/stevesloka/envoy-xds-server/internal/server"
-	"github.com/stevesloka/envoy-xds-server/internal/watcher"
 )
 
 var (
@@ -81,7 +83,15 @@ func main() {
 		srv := serverv3.NewServer(ctx, cache, nil)
 		server.RunServer(ctx, srv, port)
 	}()
+	go func() {
+		//Run the client server
+		server := client.NewServer("localhost", 9001, nodeID, cache)
+		if err := server.Run(); err != nil {
+			panic(err)
+		}
+		fmt.Println("ALSO SERVING VIA HTTP AT")
 
+	}()
 	for {
 		select {
 		case msg := <-notifyCh:

@@ -1,4 +1,4 @@
-MODULE = github.com/stevesloka/envoy-xds-server
+MODULE = github.com/Revolyssup/envoy-xds-server
 
 GO_BUILD_VARS = \
 	github.com/projectcontour/contour/internal/build.Version=${BUILD_VERSION} \

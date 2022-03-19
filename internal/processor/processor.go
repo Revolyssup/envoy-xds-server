@@ -15,20 +15,21 @@
 package processor
 
 import (
+	"fmt"
 	"math"
 	"math/rand"
 	"os"
 	"strconv"
 
-	"github.com/stevesloka/envoy-xds-server/internal/resources"
+	"github.com/Revolyssup/envoy-xds-server/internal/resources"
 
 	"github.com/envoyproxy/go-control-plane/pkg/cache/types"
 
-	"github.com/stevesloka/envoy-xds-server/internal/xdscache"
+	"github.com/Revolyssup/envoy-xds-server/internal/xdscache"
 
+	"github.com/Revolyssup/envoy-xds-server/internal/watcher"
 	"github.com/envoyproxy/go-control-plane/pkg/cache/v3"
 	"github.com/sirupsen/logrus"
-	"github.com/stevesloka/envoy-xds-server/internal/watcher"
 )
 
 type Processor struct {
@@ -74,7 +75,7 @@ func (p *Processor) newSnapshotVersion() string {
 
 // ProcessFile takes a file and generates an xDS snapshot
 func (p *Processor) ProcessFile(file watcher.NotifyMessage) {
-
+	fmt.Println("processed the file")
 	// Parse file into object
 	envoyConfig, err := parseYaml(file.FilePath)
 	if err != nil {

@@ -1,4 +1,4 @@
-module github.com/stevesloka/envoy-xds-server
+module github.com/Revolyssup/envoy-xds-server
 
 go 1.15
 

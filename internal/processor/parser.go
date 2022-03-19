@@ -18,7 +18,7 @@ import (
 	"fmt"
 	"io/ioutil"
 
-	"github.com/stevesloka/envoy-xds-server/apis/v1alpha1"
+	"github.com/Revolyssup/envoy-xds-server/apis/v1alpha1"
 	"gopkg.in/yaml.v2"
 )
 
